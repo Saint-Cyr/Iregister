@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Edusol</title>
+  <script data-require="jquery@*" data-semver="2.0.3" src="{{ asset('vendor/jquery-3.1.0.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+<script src="{{ asset('vendor/bootstrap.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+</head>
+    <body>
+        <div class="container">
+        <div class="navbar navbar-fixed-top navbar-default">
+            <div class="navbar-inner">
+                <div class="container">   
+                    <a class="brand" style="margin: 10px; float: none;" href="#">
+                        <img src="{{ asset('images/logo.png') }}" width="100px" />
+                    </a>
+                    <a class="brand" style="margin: 900px; float: none;" href="#">
+                        <img src="{{ asset('images/logo.png') }}" width="100px" />
+                    </a>
+                </div>
+            </div>
+        </div>
+                    </br></br></br></br></br>
+                    <!-- Button trigger modal -->
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Mathematique (1<sup>ere</sup> G3B)
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLabel" style="color: blue;"><b>Mathematique (1<sup>ere</sup> G3B)</b></h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="panel-heading">
+        </div>
+        <div class="panel-body" style="font-size: 23px">
+            <div class="col-xs-12 col-sm-12" style="color: black;">
+                <p> <strong>Prof: <span id="class" style="color: blue;"> GOUNOUMOUNDJOU Sarko </span></strong></p>
+                <p> <strong>Sequence: <span id="term" style="color: blue;"> <b>1<sup>er</sup> Trimestre</b> </span></strong></p>
+                <p> <strong>Effectif: <span id="class_student_number" style="color: blue;"> 60 </span></strong></p>
+                <p> <strong>Recente Meilleur note: <span id="hight_mark" style="color: blue;"> 15.5</span></strong></p>
+                <p> <strong>Recente meilleur eleve: <span id="average_mark" style="color: blue;">GAZAMBETI Angela </span></strong></p>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+                    
+            <div>
+                <div class = "row" ng-model="template">
+                    <br>
+                    {% verbatim %}
+                    <div class="page-content">
+                        <div class="alert alert-success" width="10" role="alert">The mark <span style="font-weight: bold;"> <span ng-bind="mark">{{ mark }}</span></span> has been added to <span style="font-weight: bold;">Saint-Cyr MAPOUKA - #STD123</span> successfully !</div>
+                    <!--<div class="alert alert-danger" role="alert">Oh snap ! something went wrong when adding mark for Saint-Cyr MAPOUKA</div>-->
+                    <div class="col-lg-8">
+                    {% endverbatim %}
+                        
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                               Current Student
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-xs-12 col-sm-12" style="color: black; font-size: 23px;" >
+                                    <p> <strong>Name: <span id="student_name" style="color: blue;">  </span></strong></p>
+                                    <p> <strong>Last Mark: <span id="student_last_mark" style="color: blue;">  </span></strong></p>
+                                    <p> <strong>Last Position: <span id="student_last_position" style="color: red;">  </span></strong></p>
+                                    <p> <strong>Student #ID: <span id="student_id" style="color: blue;">  </span></strong></p>
+                                    <p> <strong>Last Performance: <span id="student_performance" style="color: red;">  </span></strong></p>
+                                    <p> <strong>Parent phone: <span id="student_parent_phone" style="color: red;">  </span></strong></p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="">
+                            <img style="font-size: 23px" id="student_image" src="{{ asset('images/next.jpg') }}"
+                                 alt="Generic placeholder thumbnail" class="img-thumbnail" width="260px">
+                        </div>
+                    </div>
+                    <div class = "col-sm-6 col-md-3">
+                      
+                       <div class = "caption">
+                           <br>
+                           <form onsubmit="submission()">
+                               <input required="required" type="text", class="form-control" id="current_mark"
+                                      style="opacity: 0"  placeholder="Input the current mark" autocomplete="off"/>
+                               
+                               
+                           </form>       
+                         
+                       </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="{{ asset('lib/jquery.scannerdetection.js') }}"></script>
+    <script type="text/javascript">
+        
+        /*var students = [
+            {"id":1, "name":"Saint-Cyr MAPOUKA", "barcode":"3306430000199", "last_mark":18.50, "image":"2.jpg",
+            "parent_phone":"+233 000 000 00", "last_position":"2nd", "performance":"EXTRA ORDINARY"},
+            {"id":2, "name":"Mexan MAPOUKA", "barcode":"8692641040365", "lastMark":19.50, "picture":"2.jpg", 
+                "parentPhone":"+233 268 568 006", "lastPosition":"1st", "performance":"EXCELLENT"}
+        ];*/
+    
+        students = [{% for std in students %} { "id":{{std.id}}, "name":"{{std.name}}", "barcode":"{{std.barcode}}", 
+                "last_mark": null, "image":"2.jpg", "parent_phone":null, "last_position": null, "performance":null},
+                    {% endfor %}];
+        
+        function submission(){
+            alert('submitted !');
+            $('#student_image').attr('src', '1.gif');
+        }
+        
+	$(document).scannerDetection({
+	timeBeforeScanTest: 200, // wait for the next character for upto 200ms
+	startChar: [120], // Prefix character for the cabled scanner (OPL6845R)
+	endChar: [13], // be sure the scan is complete if key 13 (enter) is detected
+	avgTimeByChar: 40, // it's not a barcode if a character takes longer than 40ms
+	onComplete: function(barcode, qty){
+            //Set the found variable to true
+	    var std = students.find(x => x.barcode === barcode);
+	    if(!(typeof std === 'undefined')){
+		$('#student_name').text(std.name);
+		$('#student_id').text(std.id);
+                $('#student_last_mark').text(std.last_mark);
+                $('#student_parent_phone').text(std.parent_phone);
+                $('#student_last_position').text(std.last_position);
+                $('#student_performance').text(std.performance);
+                $('#student_image').attr('src', '{{ asset('images/') }}'+std.image);
+                $('#current_mark').focus();
+                //Change the value style attibute
+                $('#current_mark').attr('style', 'opacity: 1');
+	    }else{
+		var audioElement = document.createElement('audio');
+                audioElement.setAttribute('src', '{{ asset('1.mp3') }}');
+                audioElement.play();
+                $('#student_image').attr('src', '{{ asset('images/11.jpg') }}');
+                //audioElement.pause();
+                alert('Sorry this student is not part of Section 5em 2');
+	    }	    
+
+
+            }        	
+    });
+    
+    
+
+    </script>
+    
+</html>
+

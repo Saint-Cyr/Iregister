@@ -1,0 +1,26 @@
+services:
+    console_command.csv_import:
+        class: AppBundle\Command\CsvImportCommand
+        arguments:
+            -  "@doctrine.orm.entity_manager"
+        tags: 
+            - { name: console.command }
+            
+    app.utils:
+        class: AppBundle\Service\Utils
+        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
+        
+    app.utilsLTB:
+        class: AppBundle\Service\UtilsLTB
+        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
+        
+    app.utilsSTD:
+        class: AppBundle\Service\UtilsSTD
+        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
+
+    app.admin.person:
+        class: AppBundle\Admin\PersonAdmin
+        arguments: [~, AppBundle\Entity\Person, AppBundle:PersonAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Person }
+        public: true

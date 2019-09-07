@@ -1,0 +1,221 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+    role_hierarchy:
+        ROLE_MARK_READER:
+            - ROLE_APP_ADMIN_MARK_LIST
+            - ROLE_APP_ADMIN_MARK_VIEW
+
+        ROLE_MARK_EDITOR:
+            - ROLE_APP_ADMIN_MARK_CREATE
+            - ROLE_APP_ADMIN_MARK_EDIT
+            - ROLE_APP_ADMIN_MARK_DELETE
+            
+        ROLE_STUDENT_READER:
+            - ROLE_APP_ADMIN_STUDENT_LIST
+            - ROLE_APP_ADMIN_STUDENT_VIEW
+        
+        ROLE_STUDENT_EDITOR:
+            - ROLE_APP_ADMIN_STUDENT_CREATE
+            - ROLE_APP_ADMIN_STUDENT_EDIT
+            - ROLE_APP_ADMIN_STUDENT_DELETE
+            
+        ROLE_STUDENT_PARENT_READER:
+            - ROLE_APP_ADMIN_STUDENT_PARENT_LIST
+            - ROLE_APP_ADMIN_STUDENT_PARENT_VIEW
+
+        ROLE_STUDENT_PARENT_EDITOR:
+            - ROLE_APP_ADMIN_STUDENT_PARENT_CREATE
+            - ROLE_APP_ADMIN_STUDENT_PARENT_EDIT
+            - ROLE_APP_ADMIN_STUDENT_PARENT_DELETE
+            
+        ROLE_MAIN_TEACHER_READER:
+            - ROLE_APP_ADMIN_MAIN_TEACHER_LIST
+            - ROLE_APP_ADMIN_MAIN_TEACHER_VIEW
+
+        ROLE_MAIN_TEACHER_EDITOR:
+            - ROLE_APP_ADMIN_MAIN_TEACHER_CREATE
+            - ROLE_APP_ADMIN_MAIN_TEACHER_EDIT
+            - ROLE_APP_ADMIN_MAIN_TEACHER_DELETE
+            
+        ROLE_TEACHER_READER:
+            - ROLE_APP_ADMIN_TEACHER_LIST
+            - ROLE_APP_ADMIN_TEACHER_VIEW
+
+        ROLE_TEACHER_EDITOR:
+            - ROLE_APP_ADMIN_TEACHER_CREATE
+            - ROLE_APP_ADMIN_TEACHER_EDIT
+            - ROLE_APP_ADMIN_TEACHER_DELETE
+            
+        ROLE_EVALUATION_TYPE_READER:
+            - ROLE_APP_ADMIN_EVALUATION_TYPE_LIST
+            - ROLE_APP_ADMIN_EVALUATION_TYPE_VIEW
+
+        ROLE_EVALUATION_TYPE_EDITOR:
+            - ROLE_APP_ADMIN_EVALUATION_TYPE_CREATE
+            - ROLE_APP_ADMIN_EVALUATION_TYPE_EDIT
+            - ROLE_APP_ADMIN_EVALUATION_TYPE_DELETE
+            
+        ROLE_SEQUENCE_READER:
+            - ROLE_APP_ADMIN_SEQUENCE_LIST
+            - ROLE_APP_ADMIN_SEQUENCE_VIEW
+
+        ROLE_SEQUENCE_EDITOR:
+            - ROLE_APP_ADMIN_SEQUENCE_CREATE
+            - ROLE_APP_ADMIN_SEQUENCE_EDIT
+            - ROLE_APP_ADMIN_SEQUENCE_DELETE
+            
+        ROLE_SECTION_READER:
+            - ROLE_APP_ADMIN_SECTION_LIST
+            - ROLE_APP_ADMIN_SECTION_VIEW
+
+        ROLE_SECTION_EDITOR:
+            - ROLE_APP_ADMIN_SECTION_CREATE
+            - ROLE_APP_ADMIN_SECTION_EDIT
+            - ROLE_APP_ADMIN_SECTION_DELETE
+            
+        ROLE_LEVEL_READER:
+            - ROLE_APP_ADMIN_LEVEL_LIST
+            - ROLE_APP_ADMIN_LEVEL_VIEW
+
+        ROLE_LEVEL_EDITOR:
+            - ROLE_APP_ADMIN_LEVEL_CREATE
+            - ROLE_APP_ADMIN_LEVEL_EDIT
+            - ROLE_APP_ADMIN_LEVEL_DELETE
+            
+        ROLE_COEFFICIENT_READER:
+            - ROLE_APP_ADMIN_COEFFICIENT_LIST
+            - ROLE_APP_ADMIN_COEFFICIENT_VIEW
+
+        ROLE_COEFFICIENT_EDITOR:
+            - ROLE_APP_ADMIN_COEFFICIENT_CREATE
+            - ROLE_APP_ADMIN_COEFFICIENT_EDIT
+            - ROLE_APP_ADMIN_COEFFICIENT_DELETE
+            
+        ROLE_PROGRAM_READER:
+            - ROLE_APP_ADMIN_PROGRAM_LIST
+            - ROLE_APP_ADMIN_PROGRAM_VIEW
+
+        ROLE_PROGRAM_EDITOR:
+            - ROLE_APP_ADMIN_PROGRAM_CREATE
+            - ROLE_APP_ADMIN_PROGRAM_EDIT
+            - ROLE_APP_ADMIN_PROGRAM_DELETE
+            
+        ROLE_FIELD_READER:
+            - ROLE_APP_ADMIN_FIELD_LIST
+            - ROLE_APP_ADMIN_FIELD_VIEW
+
+        ROLE_FIELD_EDITOR:
+            - ROLE_APP_ADMIN_FIELD_CREATE
+            - ROLE_APP_ADMIN_FIELD_EDIT
+            - ROLE_APP_ADMIN_FIELD_DELETE
+            
+        ROLE_ABSENCE_COMPTER_READER:
+            - ROLE_APP_ADMIN_ABSENCE_COMPTER_LIST
+            - ROLE_APP_ADMIN_ABSENCE_COMPTER_VIEW
+
+        ROLE_ABSENCE_COMPTER_EDITOR:
+            - ROLE_APP_ADMIN_ABSENCE_COMPTER_CREATE
+            - ROLE_APP_ADMIN_ABSENCE_COMPTER_EDIT
+            - ROLE_APP_ADMIN_ABSENCE_COMPTER_DELETE
+            
+        ROLE_CYCLE_READER:
+            - ROLE_APP_ADMIN_CYCLE_LIST
+            - ROLE_APP_ADMIN_CYCLE_VIEW
+
+        ROLE_CYCLE_EDITOR:
+            - ROLE_APP_ADMIN_CYCLE_CREATE
+            - ROLE_APP_ADMIN_CYCLE_EDIT
+            - ROLE_APP_ADMIN_CYCLE_DELETE
+            
+        ROLE_EVALUATION_READER:
+            - ROLE_APP_ADMIN_EVALUATION_LIST
+            - ROLE_APP_ADMIN_EVALUATION_VIEW
+
+        ROLE_EVALUATION_EDITOR:
+            - ROLE_APP_ADMIN_EVALUATION_CREATE
+            - ROLE_APP_ADMIN_EVALUATION_EDIT
+            - ROLE_APP_ADMIN_EVALUATION_DELETE
+        
+        ROLE_LEVEL1:
+            - ROLE_APP_ADMIN_MARK_CREATE
+            - ROLE_MARK_READER
+            - ROLE_STUDENT_READER
+            - ROLE_STUDENT_PARENT_READER
+            - ROLE_STUDENT_PARENT_EDITOR
+            - ROLE_MAIN_TEACHER_READER
+            - ROLE_TEACHER_READER
+            - ROLE_SEQUENCE_READER
+            - ROLE_SECTION_READER
+            - ROLE_LEVEL_READER
+            - ROLE_COEFFICIENT_READER
+            - ROLE_PROGRAM_READER
+            - ROLE_FIELD_READER
+            - ROLE_APP_ADMIN_ABSENCE_COMPTER_CREATE
+            - ROLE_ABSENCE_COMPTER_READER
+            - ROLE_APP_ADMIN_ABSENCE_COMPTER_EDIT
+            - ROLE_CYCLE_READER
+            - ROLE_EVALUATION_READER
+            
+        ROLE_LEVEL2:
+            - ROLE_MARK_READER
+            - ROLE_MARK_EDITOR
+            - ROLE_APP_ADMIN_STUDENT_CREATE
+            - ROLE_STUDENT_READER
+            - ROLE_STUDENT_PARENT_READER
+            - ROLE_STUDENT_PARENT_EDITOR
+            - ROLE_MAIN_TEACHER_READER
+            - ROLE_MAIN_TEACHER_EDITOR
+            - ROLE_APP_ADMIN_SEQUENCE_CREATE
+            - ROLE_APP_ADMIN_SECTION_CREATE
+            - ROLE_SECTION_READER
+            - ROLE_APP_ADMIN_SECTION_EDIT
+            - ROLE_COEFFICIENT_READER
+            - ROLE_PROGRAM_READER
+            - ROLE_APP_ADMIN_PROGRAM_EDIT
+            - ROLE_FIELD_READER
+            - ROLE_APP_ADMIN_FIELD_EDIT
+            - ROLE_ABSENCE_COMPTER_READER
+            - ROLE_ABSENCE_COMPTER_EDITOR
+            - ROLE_APP_ADMIN_EVALUATION_CREATE
+            - ROLE_EVALUATION_READER
+            - ROLE_APP_ADMIN_EVALUATION_EDIT
+            
+        ROLE_SUPER_ADMIN:
+            - ROLE_LEVEL1
+            - ROLE_LEVEL2
+
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+        
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+        in_memory:
+            memory: ~
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern:  ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                # if you are using Symfony < 2.8, use the following config instead:
+                # csrf_provider: form.csrf_provider
+            logout:       true
+            anonymous:    true
+            
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/admin/, role: ROLE_LEVEL1 }
+        - { path: ^/report, role: ROLE_SUPER_ADMIN }
+        - { path: ^/pos_barcode, role: ROLE_SELLER }
+        - { path: ^/pos2, role: ROLE_SELLER }
+        - { path: ^/pos, role: ROLE_SELLER }

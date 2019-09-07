@@ -1,0 +1,7 @@
+user_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+
+login_barcode:
+    path:    /login_barcode
+    defaults: { _controller: UserBundle:Security:loginBarcode }

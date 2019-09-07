@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Edusol</title>
+  <script data-require="jquery@*" data-semver="2.0.3" src="{{ asset('vendor/jquery-3.1.0.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap.min.css') }}">
+<script src="{{ asset('vendor/bootstrap.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+
+</head>
+    <body>
+        <div class="container">
+            <div class="navbar navbar-fixed-top navbar-default">
+            <div class="navbar-inner">
+                <div class="container">   
+                    <a class="brand" style="margin: 10px; float: none;" >
+                        <img src="{{ asset('images/logo.jpg') }}" width="100px" />
+                    </a>
+                    <a class="brand" style="margin: 900px; float: none;" >
+                        <img src="{{ asset('images/logo_ltb.png') }}" width="100px" />
+                    </a>
+                </div>
+            </div>
+        </div>
+                    </br></br></br></br></br>
+            <style>
+            .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+                background-color: #a09fa3 !important;
+            }
+        </style>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    {{ evaluation.program.name }} || {{ section.name }}
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLabel" style="color: red;"><b>{{ evaluation.program.name }} || {{ section.name }}</b></h3>
+        <style>
+            .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+                background-color: #a09fa3 !important;
+            }
+        </style>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="panel-heading">
+        </div>
+        <style>
+                .panel > .panel-heading {
+                    background-color: #a09fa3;
+                }
+            </style>
+        <div class="panel-body" style="font-size: 23px">
+            <div class="col-xs-12 col-sm-12" style="color: black;">
+                <p> <strong><u>Evaluation</u>: <span id="class" style="color: red;">{{ evaluation.name|striptags }} ({{ evaluation.createdAt|date("d/m/y") }})</span></strong></p>
+                <p> <strong><u>Type d'Evaluation</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.evaluationType.name }} </span></strong></p>
+                <p> <strong><u>Prof</u>: <span id="class" style="color: #a09fa3;"> GOUNOUMOUNDJOU Sarko </span></strong></p>
+                <p> <strong><u>Sequence</u>: <span id="term" style="color: #a09fa3;"> <b>1<sup>er</sup> Trimestre</b> </span></strong></p>
+                <p> <strong><u>Effectif</u>: <span id="class_student_number" style="color: #a09fa3;"> 60 </span></strong></p>
+                <p> <strong><u>Recente Meilleur note</u>: <span id="hight_mark" style="color: #a09fa3;"> 15.5</span></strong></p>
+                <p> <strong><u>Recent(e) meilleur eleve</u>: <span id="average_mark" style="color: #a09fa3;">GAZAMBETI Angela </span></strong></p>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+            <div>
+                <div class = "row" ng-model="template">
+                    <br>
+                    {% verbatim %}
+                    <div class="page-content">
+                        
+                    {% endverbatim %}
+                    <div class="col-lg-8" style="font-size: 23px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                               Current Student
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-xs-12 col-sm-12" style="color: black;">
+                                    <p> <strong>Full Name: <span id="student_name" style="color: blue;">  </span></strong></p>
+                                    <p> <strong>Last Mark: <span id="student_last_mark" style="color: red;">  </span></strong></p>
+                                    <p> <strong>Last Position: <span id="student_last_position" style="color: red;"> </span></strong></p>
+                                    <p> <strong>Student #ID: <span id="student_id" style="color: blue;"> </span></strong></p>
+                                    <p> <strong>Last Performance: <span id="student_performance" style="color: red;"> </span></strong></p>
+                                    <p> <strong>Last transaction: <span id="last_transaction" style="color: red;">  </span></strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="">
+                            <img id="student_image" src="{{ asset('images/next.png') }}" alt="Generic placeholder thumbnail---" 
+                                 class="img-circle" width="345px">
+                        </div>
+                    </div>
+                    <div class = "col-sm-6 col-md-3">
+                      
+                       <div class = "caption">
+                           <br>
+                           <form onsubmit="submission(event)"  style="padding-left: 70px">
+                               <input required="required" type="number" id="current_mark"
+                                     max="20" min="0" step="any" style="opacity: 0"  placeholder="17.5"
+                                     autocomplete="off" name="new_mark"/>
+                               
+                           </form>
+                           <input type="text" name="student_id" id="STUDENT_ID" style="opacity: 0;"/>
+                           
+                       </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="{{ asset('lib/jquery.scannerdetection.js') }}"></script>
+    <script type="text/javascript">
+        
+        function submission(e){
+            $('#student_image').attr('src', '{{ asset('images/animated2.gif') }}');
+            //Prepare all variables that need to be sent to server
+            var sectionId = {{ section.id }};
+            var evaluationId = {{ evaluation.id }};
+            var studentId = $('input[name="student_id"]').val();
+            var newMark = $('input[name="new_mark"]').val();
+            
+            $.ajax({
+                url:'{{ path('mark_upload') }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "data":{ 
+                            section_id: sectionId,
+                            evaluation_id: evaluationId,
+                            student_id: studentId,
+                            mark: newMark 
+                        }
+                    },
+                        
+                async: true,
+                success: function (data)
+                {
+                    alert(data);
+                    $('#current_mark').attr('style', 'opacity: 0');
+                    $('#student_performance').text('N/A');
+                    $('#student_image').attr('src', '{{ asset('images/next.png') }}');
+                    $('#current_mark').val('');
+                    $('#last_transaction').text(data);
+                },
+                error: function ()
+                {
+                    alert('Error ');
+                    $('#student_performance').text('LAST_INFO_GOES_HERE..ERROR.');
+                    
+                }
+            });
+            e.preventDefault();
+            
+            $('#student_name').focus();    
+        }
+        
+	$(document).scannerDetection({
+	timeBeforeScanTest: 200, // wait for the next character for upto 200ms
+	startChar: [120], // Prefix character for the cabled scanner (OPL6845R)
+	endChar: [5], // be sure the scan is complete if key 13 (enter) is detected
+	avgTimeByChar: 40, // it's not a barcode if a character takes longer than 40ms
+	onComplete: function(scannedBarcode, qty){
+        
+            students = [{% for std in students %}
+                        { "id":{{std.id}}, "name":"{{std.name}}", "barcode":{{ std.barcodeValue }}, 
+                            "last_mark": null, "image":"2.jpg", "parent_phone":null, "last_position": null, "performance":null},
+                    {% endfor %}
+                            ];
+                          
+            var std = students.find(obj => {
+                return obj.barcode === parseInt(scannedBarcode, 10);
+            });
+
+	    if(!(typeof std == 'undefined')){
+		$('#student_name').text(std.name);
+		$('#student_id').text(std.id);
+                $('#student_last_mark').text('N/A');
+                $('#student_parent_phone').text('N/A');
+                $('#student_last_position').text('N/A');
+                $('#student_performance').text('N/A');
+                $('#student_image').attr('src', '{{ asset('images/') }}'+std.image);
+                $('#current_mark').focus();
+                $('#STUDENT_ID').val(std.id);
+                $('#SECTION_ID').val(2);
+                $('#EVALUATION_ID').val(1);
+                //Change the value style attibute
+                $('#current_mark').attr('style', 'opacity: 1');
+	    }else{
+		var audioElement = document.createElement('audio');
+                audioElement.setAttribute('src', '{{ asset('error.mp3') }}');
+                audioElement.play();
+                $('#student_image').attr('src', '{{ asset('images/11.jpg') }}');
+                //audioElement.pause();
+                alert('Student not registered.'+barcode);
+	    }	    
+
+
+            }        	
+    });
+    
+    
+    //Script for the alert box
+    var ALERT_TITLE = "Academ";
+    var ALERT_BUTTON_TEXT = "Ok";
+
+    if(document.getElementById) {
+        window.alert = function(txt) {
+            createCustomAlert(txt);
+        }
+    }
+
+    function createCustomAlert(txt) {
+        d = document;
+
+        if(d.getElementById("modalContainer")) return;
+
+        mObj = d.getElementsByTagName("body")[0].appendChild(d.createElement("div"));
+        mObj.id = "modalContainer";
+        mObj.style.height = d.documentElement.scrollHeight + "px";
+
+        alertObj = mObj.appendChild(d.createElement("div"));
+        alertObj.id = "alertBox";
+        if(d.all && !window.opera) alertObj.style.top = document.documentElement.scrollTop + "px";
+        alertObj.style.left = (d.documentElement.scrollWidth - alertObj.offsetWidth)/2 + "px";
+        alertObj.style.visiblity="visible";
+
+        h1 = alertObj.appendChild(d.createElement("h1"));
+        h1.appendChild(d.createTextNode(ALERT_TITLE));
+
+        msg = alertObj.appendChild(d.createElement("p"));
+        //msg.appendChild(d.createTextNode(txt));
+        msg.innerHTML = txt;
+
+        btn = alertObj.appendChild(d.createElement("a"));
+        btn.id = "closeBtn";
+        btn.appendChild(d.createTextNode(ALERT_BUTTON_TEXT));
+        btn.href = "#";
+        btn.focus();
+        btn.onclick = function() { removeCustomAlert();return false; }
+
+        alertObj.style.display = "block";
+
+    }
+
+    function removeCustomAlert() {
+        document.getElementsByTagName("body")[0].removeChild(document.getElementById("modalContainer"));
+    }
+  
+    </script>
+    <style>
+    #modalContainer {
+    background-color:rgba(0, 0, 0, 0.3);
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:10000;
+    background-image:url(tp.png); /* required by MSIE to prevent actions on lower z-index elements */
+    }
+
+    #alertBox {
+        position:relative;
+        width:300px;
+        min-height:100px;
+        margin-top:50px;
+        border:1px solid #666;
+        background-color:#fff;
+        background-repeat:no-repeat;
+        background-position:20px 30px;
+    }
+
+    #modalContainer > #alertBox {
+        position:fixed;
+    }
+
+    #alertBox h1 {
+        margin:0;
+        font:bold 0.9em verdana,arial;
+        background-color:#a09fa3;
+        color:#FFF;
+        border-bottom:1px solid #000;
+        padding:2px 0 2px 5px;
+    }
+
+    #alertBox p {
+        font:0.7em verdana,arial;
+        height:50px;
+        padding-left:50px;
+        margin-left: auto;
+        margin-top: 20px;
+        font-size: 18px;
+    }
+
+    #alertBox #closeBtn {
+        display:block;
+        position:relative;
+        margin:5px auto;
+        padding:7px;
+        border:0 none;
+        width:70px;
+        font:0.7em verdana,arial;
+        text-transform:uppercase;
+        text-align:center;
+        color:#FFF;
+        background-color:#a09fa3;
+        border-radius: 3px;
+        text-decoration:none;
+    }
+
+    /* unrelated styles */
+
+    #mContainer {
+        position:relative;
+        width:600px;
+        margin:auto;
+        padding:5px;
+        border-top:2px solid #000;
+        border-bottom:2px solid #000;
+        font:0.7em verdana,arial;
+    }
+
+    h1,h2 {
+        margin:0;
+        padding:4px;
+        font:bold 1.5em verdana;
+        border-bottom:1px solid #000;
+    }
+
+    code {
+        font-size:1.2em;
+        color:#069;
+    }
+
+    #credits {
+        position:relative;
+        margin:25px auto 0px auto;
+        width:350px; 
+        font:0.7em verdana;
+        border-top:1px solid #000;
+        border-bottom:1px solid #000;
+        height:90px;
+        padding-top:4px;
+    }
+
+    #credits img {
+        float:left;
+        margin:5px 10px 5px 0px;
+        border:1px solid #000000;
+        width:80px;
+        height:79px;
+    }
+
+    .important {
+        background-color:#F5FCC8;
+        padding:2px;
+    }
+
+    code span {
+        color:green;
+    }
+  </style>
+</html>
+

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Edusol-Academ</title>
+
+    <!-- Bootstrap -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    
+    <!-- Custom styling plus plugins -->
+    
+    <link rel="stylesheet" href="{{ asset('css/AdminLTE.min.css') }}">
+    <link rel='shortcut icon' type='image/x-icon' href='{{ asset('images/favicon.ico') }}' />
+  </head>
+
+{% for markTableOneStudent in markTables.mark_tables %}
+<body onload="window.print();">
+<div class="wrapper">
+  <!-- Main content -->
+  <section class="invoice">
+    <!-- title row -->
+    <div class="row">
+      
+      <div class="col-xs-12" style="margin-bottom: 70px;">
+        
+          <img src="{{ asset('images/logo_ltb.png') }}" style="" width='100px' />
+          <span style="margin-left: 500px;">
+          <img src="{{ asset('images/logo.png') }}" style="" width='100px' />
+          </span>
+        
+      </div>
+      
+      
+      <!-- /.col -->
+    </div>
+        <div>
+            <h1 class="text-center" style="font-size: 15px;"><b>{%if parameters.schoolName is empty %}
+                                                    #YOUR SCHOOL NAME GOES HERE#
+                                                                {% else %}
+                                                                    {{ parameters.schoolName }}
+                                                                {% endif %}
+                                                                </b></h1>
+            <h1 class="text-center" style="font-size: 15px"><b> BULLETIN DE NOTES DU 
+                                                        {%if parameters.sequence.name is empty %}
+                                                    #SEQUENCE#
+                                                                {% else %}
+                                                                    {{ parameters.sequence.name|upper }}
+                                                                {% endif %}
+                                                                
+                                                                {%if parameters.academicYear is empty %}
+                                                    #ACADEMIC_YEAR#
+                                                                {% else %}
+                                                                    {{ parameters.academicYear }}
+                                                                {% endif %}
+                
+                </b></h1>
+        </div>
+        
+    <table>
+  
+  
+ <table class="table table-bordered">
+  <thead>
+    
+  </thead>
+  <tbody>
+    <tr>
+      
+      <td><b>Nom(s) et Prenom :</b> {{ markTableOneStudent.param.student_name }}</td>
+      <td><b>Professeur Principal:</b> {{ markTables.parameters.main_teacher }}</td>
+      
+    </tr>
+    <tr>
+        <td><b>Class :</b> {{ markTables.parameters.section_name }}</td>
+      <td><b>Date du conseil:</b> {{ "now"|date("d/m/Y") }}</td>
+    </tr>
+    <tr>
+        <td><b>Effectif:</b> {{ markTables.parameters.student_number }}</td>
+        <td><b>Nom(s) de(s) Parent(s):</b> N/A </td>
+    </tr>
+    <tr>
+        
+    </tr>
+             
+  </tbody>
+</table>
+<br>
+<table class="table table-bordered">
+  <thead>
+    
+  </thead>
+  <tbody>
+    <tr>
+      <td><b> Discipline</b></td>
+      <td><b>Coef</b></td>
+      <td><b>Dev/20</b></td>
+      <td><b>Comp/40</b></td>
+      <td><b>Moy/20</b></td>
+      <td><b>Note avec Coef.</b></td>
+      <td><b>Nom du Prof.</b></td>
+      <td><b>Appreciation</b></td>
+      
+  
+    </tr>
+    {% set nb = (8 - markTableOneStudent|length) %}
+    {% for row in markTableOneStudent.rows %}
+    <tr>
+      <td>{{ row.program_name }}</td>
+      <td>{{ row.coefficient }}</td>
+      <td>{{ row.mark|number_format(2) }}</td>
+      <td>{{ row.mark_composition|number_format(2) }}</td>
+      <td>{{ row.average|number_format(2) }}</td>
+      <td>{{ row.mark_coefficient|number_format(2) }}</td>
+      <td>{{ row.teacher }}</td>
+      <td>{{ row.appreciation }}</td>
+    </tr>
+    {% endfor %}
+    {% for i in 1..nb %}
+    <tr>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+    </tr>
+    {% endfor %}
+    <tr>
+  <td><b>Total</b></td>
+  <td><b>{{ markTables.parameters.total_coefficient }}</b></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><b> {{ markTableOneStudent.param.total_mark_coefficient }} </b></td></b>
+    </tr>
+  </tbody>
+</table>
+
+    <div class="row">
+      <!-- accepted payments column -->
+      <div class="col-xs-6">
+
+        <div class="table-responsive"  style='font-size: 12px'>
+          <table class="table">
+            <tr>
+              <th>Moy. du 1<sup>ere</sup> Trimestre:</th>
+              <td> {{ (markTableOneStudent.param.total_mark_coefficient/markTables.parameters.total_coefficient)|number_format(2) }}</td>
+            </tr>
+            <tr>
+              <th>Moy. du 2<sup>eme</sup> Trimestre:</th>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <th>Moy. du 3<sup>eme</sup> Trimestre:</th>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <th>Rang:</th>
+              <td>N/A</td>
+            </tr>
+          </table>
+        </div>
+       
+       
+      {#<img src="{{ asset('images/barcode_student.png') }}" style="padding-top: 2px; padding-left: 8px;"/>#}  
+      </div>
+      
+      <!-- /.col -->
+      <div class="col-xs-6">
+
+        <div class="table-responsive"  style='font-size: 12px'>
+          <table class="table">
+            <tr>
+              <th style="width:50%">DECISION DU CONSEIL</th>
+              
+            </tr>
+            <tr>
+              <th>TH + Felicitation:</th>
+              <td>{% if markTableOneStudent.param.global_appreciation.th_congratulation %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+            <tr>
+              <th>TH + Encouragement:</th>
+              <td>{% if markTableOneStudent.param.global_appreciation.th_encouragement %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+            <tr>
+              <th>Tableau d'honneur:</th>
+              <td>{% if markTableOneStudent.param.global_appreciation.th %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+            <tr>
+              <th>Avertissement:</th>
+              <td>Non</td>
+            </tr>
+            <tr>
+              <th>Blame:</th>
+              <td>Non</td>
+            </tr>
+            <tr>
+              <th>Exclu:</th>
+              <td>{% if markTableOneStudent.param.global_appreciation.exclusion %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+          </table>
+        </div>
+        
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- ./wrapper -->
+</body>
+{% endfor %}
+</html>

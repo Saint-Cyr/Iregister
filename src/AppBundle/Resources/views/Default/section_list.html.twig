@@ -1,0 +1,11 @@
+        
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    <div>
+        <a href="{{path('mark_table', {'section_id': object.id}) }}" target="_blank">
+            <img src="{{ asset('images/mark_table3.jpg') }}" alt="{{ object.name }}" style="width: 85px; height: 65px;"/>
+        </a>
+        <br/>
+    </div>
+{% endblock %}

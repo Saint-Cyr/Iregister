@@ -1,0 +1,26 @@
+UserBundle\Entity\User:
+    user1:
+        username: super-admin
+        email: super-admin@domain.com
+        plainPassword: test
+        enabled: true
+        name: SUPER-ADMIN
+        roles: [ROLE_SUPER_ADMIN]
+        
+    user2:
+        username: user_level1
+        email: user_level1@domain.com
+        plainPassword: test
+        enabled: true
+        name: USER LEVEL1
+        roles: [ROLE_LEVEL1]
+        
+AppBundle\Entity\Person:
+    person_1:
+        name: MAMADOU Hourouma
+        age: 32
+        area: Locality goes here
+        status: IDP
+        sexe: M
+        code: 00001
+        

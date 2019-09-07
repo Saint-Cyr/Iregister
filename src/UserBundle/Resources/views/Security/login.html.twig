@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Edusol - Academ</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/bootstrap/css/bootstrap.min.css') }}">
+        <script src="{{ asset('vendor/bootstrap.min.js') }}"></script>
+        <script data-require="jquery@*" data-semver="2.0.3" src="{{ asset('vendor/jquery-3.1.0.min.js') }}"></script>
+</head>
+<body>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-85 p-b-20">
+				<form class="login100-form validate-form" action="{{ path("fos_user_security_check") }}" method="post">
+                                    <br>
+                                    
+                                        <div class="text-center">
+                                            
+                                                <img src="{{ asset('images/logo.jpg') }}" alt="AVATAR" class="rounded" width="220px"/>
+                                            
+                                        </div>
+                                                
+                                        <div class="text-center">
+                                            
+                                            
+                                                <img src="{{ asset('images/security4.jpg') }}" alt="AVATAR" class="rounded" width="520px" id="student_image"/>
+                                            
+                                        </div>
+                                        
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="dropDownSelect1"></div>
+</body>
+
+<script type="text/javascript" src="{{ asset('lib/jquery.scannerdetection.js') }}"></script>
+<script type="text/javascript">
+        
+        students = [{ "id":1, "name":"SARKO", "barcode":"8692641040365", 
+                "last_mark": null, "image":"2.jpg", "parent_phone":null, "last_position": null, "performance":null},
+                    ];
+        
+        function submission(e, barcode){
+            
+            $('#student_image').attr('src', '{{ asset('images/security1.gif') }}');
+            
+            $.ajax({
+                url:'{{ path('login_barcode') }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "data":{ 
+                            barcode: barcode
+                        }
+                    },
+                        
+                async: true,
+                success: function (data, textStatus, xhr)
+                {
+                    //Redirect to the front page if login properly
+                    if(data.login == true){
+                        
+                        var delay = 10000;
+                        setTimeout(function() {
+                           var audioElement = document.createElement('audio');
+                        
+                        audioElement.setAttribute('src', '{{ asset('images/1.mp3') }}');
+                        audioElement.play();
+                         window.location.href = data.redirect;
+                        }, delay);
+                        
+                       
+                    }else{
+                        var delay = 10000;
+                        setTimeout(function() {
+                           var audioElement = document.createElement('audio');
+                        
+                        audioElement.setAttribute('src', '{{ asset('images/error.mp3') }}');
+                        audioElement.play();
+                        $('#student_image').attr('src', '{{ asset('images/access_denied.jpg') }}');
+                        
+                        $('#info').text('Checking your card informations...');
+                        }, delay);
+                        
+                    }
+                   
+                },
+                error: function ()
+                {
+                    alert('Error login Faild.');
+                    $('#student_performance').text('LAST_INFO_GOES_HERE..ERROR.');
+                    
+                }
+            });
+            e.preventDefault();
+            
+            $('#student_name').focus();    
+        }
+        
+	$(document).scannerDetection({
+	timeBeforeScanTest: 200, // wait for the next character for upto 200ms
+	startChar: [120], // Prefix character for the cabled scanner (OPL6845R)
+	endChar: [13], // be sure the scan is complete if key 13 (enter) is detected
+	avgTimeByChar: 40, // it's not a barcode if a character takes longer than 40ms
+	onComplete: function(barcode, qty){
+            submission(null, barcode);    
+	}	    
+          	
+    });
+    </script>
+</html>

@@ -1,0 +1,55 @@
+<html>
+
+<head>
+  <title>Edusol</title>
+  <script data-require="jquery@*" data-semver="2.0.3" src="{{ asset('vendor/jquery-3.1.0.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap.min.css') }}">
+<script src="{{ asset('vendor/bootstrap.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+</head>
+    <body>
+        <div class="container">
+            
+                    <br><br>
+                    <div class="text-center">
+                                            
+                        <img src="{{ asset('images/logo.jpg') }}" alt="AVATAR" class="rounded" width="160px"/>                    
+                    </div>
+             <div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+        
+            <img src="{{ asset('images/mark1.png') }}" width="230px" alt="...">
+        
+      <div class="caption">
+          <p> <a href="#" class="btn btn-default" role="button">GENERATE #ID CARD</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+        
+            <img src="{{ asset('images/admin1.png') }}" width="230px" alt="...">
+        
+      <div class="caption">
+          <p> <a href="{{ path('sonata_admin_dashboard') }}" class="btn btn-default" role="button">ADMINISTRATION</a></p>
+      </div>
+    </div>  
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+        
+            <img src="{{ asset('images/configuration.png') }}" width="230px" alt="...">
+        
+      <div class="caption">
+          <p> <a href="{{ path('setting') }}" class="btn btn-default" role="button">CONFIGURATION</a></p>
+      </div>
+    </div>  
+  </div>
+  
+</div>
+            
+    </body>
+    
+</html>

@@ -1,0 +1,101 @@
+{#% extends "FOSUserBundle::layout.html.twig" %#}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Academ</title>
+
+    <!-- Bootstrap -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
+    <link rel='shortcut icon' type='image/x-icon' href='{{ asset('images/favicon.ico') }}' />
+	
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  <div class="container">    
+        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <span style="margin-left: 190px;">
+                <img src="{{ asset('images/logo.png') }}" width="170px" style="margin-top: 2px;" />
+            </span>
+            <style>
+                .panel > .panel-heading {
+                    background-color: #1d08a6;
+                }
+            </style>
+            <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title" style="color: white;">Sign In</div>
+                        <div style="float:right; font-size: 80%; position: relative; top:-10px">
+                            <a href="{{ path('fos_user_resetting_request') }}" style="color: white;">Forgot password?</a></div>
+                    </div>     
+
+                    <div style="padding-top:30px" class="panel-body" >
+                        {% if error %}
+                            <div id="login-alert" class="alert alert-danger col-sm-12">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                            
+                        <form id="loginform" action="{{ path("fos_user_security_check") }}" class="form-horizontal" role="form" method="post">
+                                    
+                            <div style="margin-bottom: 25px" class="input-group">
+                                
+                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                        <input id="username" type="text" class="form-control" name="_username" value="{{ last_username }}" 
+                                               required="required" placeholder="saint-cyr@academ.com" autofocus autocomplete="off">                                        
+                                    </div>
+                                   
+                            <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                        <input id="login-password" type="password" class="form-control" name="_password" placeholder="password">
+                                    </div>
+                                
+                                <div style="margin-top:10px" class="form-group">
+                                    <!-- Button -->
+                                    <div class="col-sm-12 controls">
+                                        <style>
+                                            .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+                                                background-color: #1d08a6 !important;
+                                            }
+                                        </style>
+                                        <button class="btn btn-primary" type="submit" name="btn_create_and_create">
+                                            <!--<i class="fa fa-sign-in" aria-hidden="true"></i>-->
+                                            Login
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-md-12 control">
+                                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                                            <div style="float:left; font-size: 120%; position: relative; top:-10px">
+                                                <a href="#"><img src="{{ asset('images/fr.png') }}"/></a>      
+                                                <a href="#"><i class="fa fa-question-circle" aria-hidden="true" style="color: #320070; margin-left: 6px;"></i></a>
+                                            </div>
+                                            <div style="float:right; font-size: 80%; position: relative; top:-10px">
+                                                <a href="#" style="color: #320070;">© 2018</a>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div> 
+                            </form>     
+
+                        </div>                     
+                    </div>  
+        </div>
+        
+    </div>
+</body>
+{% endblock fos_user_content %}
+

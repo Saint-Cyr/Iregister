@@ -1,0 +1,47 @@
+mark_upload:
+    path: /mark_upload
+    defaults: { _controller: AppBundle:Default:markUpload }
+    
+generate_codbare:
+    path: /student_barcode
+    defaults: { _controller: AppBundle:Default:studentBarcode }
+    
+mark_input:
+    path: /mark_input/{section_id}/{evaluation_id}
+    defaults: { _controller: AppBundle:Default:markInput }
+    
+mark_table:
+    path: /mark_table/{section_id}
+    defaults: { _controller: AppBundle:Default:markTable }
+    
+mark_table_std:
+    path: /mark_table_std/{section_id}
+    defaults: { _controller: AppBundle:Default:markTableStd }
+    
+shortyImportCSV:
+    path: /admin/csv/import
+    defaults:  { _controller: AppBundle:Default:importFile }
+    
+tacher_card:
+    path: /teacher_card
+    defaults:  { _controller: AppBundle:Default:teacherCard }
+    
+person_card:
+    path: /person_card
+    defaults:  { _controller: AppBundle:Default:personCard }
+    
+setting:
+    path: /setting
+    defaults:  { _controller: AppBundle:Default:setting }
+    
+mark_input_parameters:
+    path: /mark_input_parameters
+    defaults: { _controller: AppBundle:Default:markInputParameters }
+    
+mark_input_parameters2:
+    path: /mark_input_parameters2/{section_id}
+    defaults: { _controller: AppBundle:Default:markInputParameters2 }
+    
+mark_input_parameters3:
+    path: /mark_input_parameters3/{section_id}/{program_id}
+    defaults: { _controller: AppBundle:Default:markInputParameters3 }

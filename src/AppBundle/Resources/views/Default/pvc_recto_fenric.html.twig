@@ -1,0 +1,251 @@
+
+<table width=780 border=0 cellpadding=7 cellspacing=2>
+{% for row in persons|batch(2) %}
+    <tr align=center>
+        {% for column in row %}
+            <td width="50%">
+            <div class="twPc-div col-sm-6 col-md-6 col-xs-6" style="background-color: white;">
+            <a class="twPc-bg twPc-block"></a>
+            <div>
+                <a class="twPc-avatarLink">
+                 {% if column.image is empty %}
+                    {% if column.sexe == "F" %}
+                        <img alt="iReg" src="{{ asset('images/avatar2.png') }}" width="165px" class="passportPicture"
+                         style="border-radius: 50%;"/>
+                    {% else %}
+                        <img alt="iReg" src="{{ asset('images/avatar.png') }}" width="165px" class="passportPicture"
+                         style="border-radius: 50%;"/>
+                    {% endif %}
+                {% else %}
+                    <img alt="academ" src="{{ asset('upload/person/'~column.image) }}" width="165px" class="passportPicture"
+                         style="border-radius: 50%;"/>
+                {% endif %}
+                </a>
+                <div class="column">
+                    <table style="margin-left:107px; color: black;">
+                        <tr>
+                            <td><img src="{{ asset('images/usaid_logo.png') }}" width="50px"/></td>
+                            <td><img src="{{ asset('images/logo_mc.png') }}" width="50px" style="margin-left: 120px;"/></td>
+                        </tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <br>
+                        <tr style="color: #ba2020;">
+                            {% if column.sexe == "F" %}
+                                <td><b>CARTE</b></td><td><b>PARTICIPANTE AGR</b></td>
+                            {% else %}
+                                <td><b>CARTE</b></td><td><b>PARTICIPANT AGR</b></td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td><b></b></td><td><b></b></td>
+                        </tr>
+                        <br>
+                         {% if column.name|length < 19 %}
+                            <tr>
+                                <td><b>Nom(s):</b></td><td>{{ column.name}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Adrs:</b></td><td>{{ column.area}}</td>
+                            </tr>
+                            <tr>
+                                {% if column.sexe == "F" %}
+                                    <td><b>Sexe:</b></td><td>Femme</td>
+                                {% else %}
+                                    <td><b>Sexe:</b></td><td>Homme</td>
+                                {% endif %}
+                            </tr>
+                            <tr>
+                                <td><b>Bureau:</b></td><td>{{ column.name}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Delivree:</b></td><td>le 17 Juil. 19</td>
+                            </tr>
+                           
+                            
+                        {% elseif column.name|length < 20 %}
+                            <tr>
+                                <td><b>Nom(s):</b></td><td style="font-size: 12px;">{{ column.name }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Adrs:</b></td><td>{{ column.area}}</td>
+                            </tr>
+                            <tr>
+                                {% if column.sexe == "F" %}
+                                    <td><b>Sexe:</b></td><td>Femme</td>
+                                {% else %}
+                                    <td><b>Sexe:</b></td><td>Homme</td>
+                                {% endif %}
+                            </tr>
+                            <tr>
+                                <td><b>Bureau:</b></td><td>{{ column.name}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Delivree:</b></td><td>le 17 Juil. 19</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td><b>Nom(s):</b></td><td style="font-size: 11.5px;">{{ column.name }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Adrs:</b></td><td>{{ column.area}}</td>
+                            </tr>
+                            <tr>
+                                {% if column.sexe == "F" %}
+                                    <td><b>Sexe:</b></td><td>Femme</td>
+                                {% else %}
+                                    <td><b>Sexe:</b></td><td>Homme</td>
+                                {% endif %}
+                            </tr>
+                            <tr>
+                                <td><b>Bureau:</b></td><td>{{ column.name}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Delivree:</b></td><td>le 17 Juil. 19</td>
+                            </tr>
+                        {% endif %}
+                        {#<tr>
+                            <td><b>Pren:</b></td> <td>{{ column.firstName|slice(0, 15) }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Adrs:</b></td> <td>{{ column.area|slice(0, 20) }} - {{ column.commune|slice(0, 10) }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Age:</b></td> <td>{{ column.age }} An(s)</td>
+                        </tr>
+                        <tr>
+                            <td><b>Sexe:</b></td> <td>{{ column.sexe }}</td>
+                        </tr>#}
+                    </table>
+                </div>
+                        <br>
+                <div class="twPc-divUser">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    
+                    <img src="data:image/png;base64, {{ column.barcode }}" width="230px" style="padding-left: 10px; padding-right: 10px;"/>
+                </div>
+            </div>
+            </div>
+        </td>
+        {% endfor %}
+    </tr>
+{% endfor %}
+</table>
+
+<style>
+    
+    @media print{
+        body {-webkit-print-color-adjust: exact;};
+    }
+    
+    .twPc-div {
+    background: #fff none repeat scroll 0 0;
+    border: 5px solid white;
+    border-radius: 16px;
+    height: 263px;
+    width: 445px;
+    max-width: 455px;
+    margin-top: -20px;
+    margin-bottom: 11px;
+    
+}
+.twPc-bg {
+    //background-image: url("{{ asset('images/bg1.png') }}");
+    background-position: 0 50%;
+    background-size: 100% auto;
+    //border-bottom: 1px solid #e1e8ed;
+    border-radius: 4px 4px 0 0;
+    height: 95px;
+    width: 50%;
+}
+.twPc-block {
+    display: block !important;
+}
+.twPc-button {
+    margin: -35px -10px 0;
+    text-align: right;
+    width: 100%;
+}
+.twPc-avatarLink {
+    background-color: #fff;
+    border-radius: 50%;
+    display: inline-block !important;
+    float: left;
+    margin: -89px 5px 0 8px;
+    max-width: 100%;
+    padding: 1px;
+    vertical-align: bottom;
+}
+.twPc-avatarImg {
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-sizing: border-box;
+    color: #fff;
+    height: 72px;
+    width: 72px;
+}
+.twPc-divUser {
+    margin: 5px 0 0;
+}
+.twPc-divName {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 21px;
+}
+.twPc-divName a {
+    color: inherit !important;
+}
+.twPc-divStats {
+    margin-left: 11px;
+    padding: 10px 0;
+}
+.twPc-Arrange {
+    box-sizing: border-box;
+    display: table;
+    margin: 0;
+    min-width: 100%;
+    padding: 0;
+    table-layout: auto;
+}
+ul.twPc-Arrange {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+.twPc-ArrangeSizeFit {
+    display: table-cell;
+    padding: 0;
+    vertical-align: top;
+}
+.twPc-ArrangeSizeFit a:hover {
+    text-decoration: none;
+}
+.twPc-StatValue {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.15s ease-in-out 0s;
+}
+.twPc-StatLabel {
+    color: #8899a6;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+    overflow: hidden;
+    text-transform: uppercase;
+    transition: color 0.15s ease-in-out 0s;
+}
+
+.column {
+     width:-50px;
+     float:left;
+     margin: -187px 5px 0 18px;
+     margin-left: 90px;
+}
+</style>
+<script>
+    window.print();
+</script>

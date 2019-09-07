@@ -1,0 +1,485 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * Person
+ *
+ * @ORM\Table(name="person")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PersonRepository")
+ * @ORM\HasLifecycleCallbacks
+ */
+class Person
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    private $barcode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="firstName", type="string", length=255, nullable=true)
+     */
+    private $firstName;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commune", type="string", length=255, nullable=true)
+     */
+    private $commune;
+    
+    /**
+     * Unmapped property to handle file uploads
+     */
+    private $file;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    private $updated;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, unique=false, nullable=true)
+     */
+    private $image;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="collected_image", type="string", length=255, unique=false, nullable=true)
+     */
+    private $collectedImage;
+    
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="collected_image_updated", type="boolean", unique=false, nullable=true)
+     */
+    private $collectedImageUpdated;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="age", type="integer", nullable=true)
+     */
+    private $age;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="area", type="string", length=255)
+     */
+    private $area;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=255, nullable=true)
+     */
+    private $status;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sexe", type="string", length=255)
+     */
+    private $sexe;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    public function __toString() {
+        if($this->name){
+            return $this->name;
+        }else{
+            return 'New Person';
+        }
+    }
+    
+    public function setBarcode($barcode)
+    {
+        $this->barcode = $barcode;
+
+        return $this;
+    }
+
+    
+    public function getBarcode()
+    {
+        return $this->barcode;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Person
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set age
+     *
+     * @param integer $age
+     *
+     * @return Person
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * Get age
+     *
+     * @return int
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * Set area
+     *
+     * @param string $area
+     *
+     * @return Person
+     */
+    public function setArea($area)
+    {
+        $this->area = $area;
+
+        return $this;
+    }
+
+    /**
+     * Get area
+     *
+     * @return string
+     */
+    public function getArea()
+    {
+        return $this->area;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     *
+     * @return Person
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set sexe
+     *
+     * @param string $sexe
+     *
+     * @return Person
+     */
+    public function setSexe($sexe)
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    /**
+     * Get sexe
+     *
+     * @return string
+     */
+    public function getSexe()
+    {
+        return $this->sexe;
+    }
+    
+    /**
+    * Get file.
+    *
+    * @return UploadedFile
+    */
+    public function getFile()
+    {
+        return $this->file;
+    }
+    
+    /**
+    * @ORM\PostPersist()
+    * @ORM\PostUpdate()
+    */
+    public function lifecycleFileUpload()
+    {
+        
+        $this->upload();
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function refreshUpdated()
+    {
+        if($this->getFile()){
+            $this->setCollectedImageUpdated(true);
+            $this->setCollectedImage($this->getId().'.'.$this->getFile()->guessExtension());
+        }
+        
+        $this->setUpdated(new \DateTime());
+    }
+    
+    /**
+     * @ORM\PreRemove()
+     */
+    public function removeUPdate()
+    {
+        //Check whether the file exists first
+        if (file_exists(getcwd().'/upload/person/'.$this->getImage())){
+            //Remove it
+            @unlink(getcwd().'/upload/person/'.$this->getImage());
+            
+        }
+        
+        return;
+    }
+    
+    public function upload()
+    {
+        // the file property can be empty if the field is not required
+        if (null === $this->getFile()) {
+            return;
+        }
+        
+        // move takes the target directory and target filename as params
+        $this->getFile()->move(getcwd().'/upload/person/media', $this->getId().'.'.$this->getFile()->guessExtension());
+        // clean up the file property as you won't need it anymore
+        $this->setFile(null);
+    }
+    
+    /**
+    * Sets file.
+    *
+    * @param UploadedFile $file
+    */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+    
+    /**
+     * Set image
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     * @param string $image
+     *
+     * @return PrDependentCandidate
+     */
+    public function setImage($image)
+    {
+        if($this->getFile() !== null){
+            $this->image = $this->getFile()->guessExtension();
+        }
+        
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        if((substr($this->image, -4) == 'jpeg')||(substr($this->image, -3) == 'jpg')||(substr($this->image, -3) == 'png')){
+            return $this->getId().'.'.$this->image;
+        }else{
+            return null;
+        }
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     *
+     * @return PrParty
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set commune
+     *
+     * @param string $commune
+     *
+     * @return Person
+     */
+    public function setCommune($commune)
+    {
+        $this->commune = $commune;
+
+        return $this;
+    }
+
+    /**
+     * Get commune
+     *
+     * @return string
+     */
+    public function getCommune()
+    {
+        return $this->commune;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return Person
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set collectedImage
+     *
+     * @param string $collectedImage
+     *
+     * @return Person
+     */
+    public function setCollectedImage($collectedImage)
+    {
+        $this->collectedImage = $collectedImage;
+
+        return $this;
+    }
+
+    /**
+     * Get collectedImage
+     *
+     * @return string
+     */
+    public function getCollectedImage()
+    {
+        return $this->collectedImage;
+        
+    }
+
+    /**
+     * Set collectedImageUpdated
+     *
+     * @param boolean $collectedImageUpdated
+     *
+     * @return Person
+     */
+    public function setCollectedImageUpdated($collectedImageUpdated)
+    {
+        $this->collectedImageUpdated = $collectedImageUpdated;
+
+        return $this;
+    }
+
+    /**
+     * Get collectedImageUpdated
+     *
+     * @return boolean
+     */
+    public function isCollectedImageUpdated()
+    {
+        return $this->collectedImageUpdated;
+    }
+}

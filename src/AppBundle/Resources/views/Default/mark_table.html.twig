@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Edusol-Academ</title>
+
+    <!-- Bootstrap -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    
+    <!-- Custom styling plus plugins -->
+    
+    <link rel="stylesheet" href="{{ asset('css/AdminLTE.min.css') }}">
+    <link rel='shortcut icon' type='image/x-icon' href='{{ asset('images/favicon.ico') }}' />
+  </head>
+
+{% for markTableOneStudent in markTables.mark_tables %}
+<body onload="window.print();" style="font-size: 8px;">
+<div class="wrapper">
+  <!-- Main content -->
+  <section class="invoice">
+    <!-- title row -->
+    <div class="row">
+      <div class="col-xs-12" style="margin-bottom: 1px;">
+          <img src="{{ asset('images/logo_ltb.png') }}" style="" width='100px' />
+          <span style="margin-left: 500px;">
+          <img src="{{ asset('images/logo.png') }}" style="" width='100px' />
+          </span>
+      </div>
+      <!-- /.col -->
+    </div>
+    <div>
+        <h1 class="text-center" style="font-size: 10px;"><b>LYCEE TECHNIQUE DE BANGUI</b></h1>
+        <h1 class="text-center" style="font-size: 10px"><b> BULLETIN DE NOTES DU 2em TRIMESTRE 2017 - 2018</b></h1>
+    </div>
+    <table>
+ <table class="table table-bordered">
+  <thead>
+    
+  </thead>
+  <tbody>
+    <tr>
+      
+      <td style="font-size: 10px;"><b>Nom(s) et Prenom :</b> {{ markTableOneStudent.student_name }}</td>
+      <td style="font-size: 10px;"><b>Professeur Principal:</b> MOIGONODE Sarko</td>
+      
+    </tr>
+    <tr>
+        <td style="font-size: 10px;"><b>Class :</b> Class_name_goes_here</td>
+      <td style="font-size: 10px;"><b>Date du conseil:</b> {{ "now"|date("d/m/Y") }}</td>
+    </tr>
+    <tr>
+        <td style="font-size: 10px;"><b>Effectif:</b> 122</td>
+        <td style="font-size: 10px;"><b>Nom(s) de(s) Parent(s):</b> GAZAMBETI Christian </td>
+    </tr>
+    <tr>
+        
+    </tr>
+             
+  </tbody>
+</table>
+<br>
+<table class="table table-bordered">
+  <thead>
+    
+  </thead>
+  <tbody class="bodyContent">
+    <tr style="font-size: 10px;">
+      <td><b>Discipline</b></td>
+      <td><b>Note/20</b></td>
+      <td><b>Coef</b></td>
+      <td><b>Note</b></td>
+      <td><b>Appreciation</b></td>
+      <td><b>Nom du Prof.</b></td>
+    </tr>
+    {% set nb = (8 - markTableOneStudent|length) %}
+    {% for row in markTableOneStudent.rows %}
+    <tr style="font-size: 11px;">
+      <td>{{ row.program_name }}</td>
+      <td>{{ row.mark|number_format(2) }}</td>
+      <td>{{ row.coefficient }}</td>
+      <td>{{ row.mark_coefficient|number_format(2) }}</td>
+      <td>{{ row.appreciation }}</td>
+      <td>{{ row.teacher }}</td>
+    </tr>
+    {% endfor %}
+    {#% for i in 1..nb %}
+    <tr>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+    </tr>
+    {% endfor %#}
+  </tbody>
+</table>
+
+    <div class="row">
+      <!-- accepted payments column -->
+      <div class="col-xs-6">
+
+        <div class="table-responsive"  style='font-size: 12px'>
+          <table class="table">
+            <tr>
+              <th>Moy. du 1<sup>ere</sup> Trimestre:</th>
+              <td>12.5</td>
+            </tr>
+            <tr>
+              <th>Moy. du 2<sup>eme</sup> Trimestre:</th>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <th>Moy. du 3<sup>eme</sup> Trimestre:</th>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <th>Rang:</th>
+              <td>1er</td>
+            </tr>
+          </table>
+          <img src="{{ asset('images/logo.png') }}" width="80px;"/>
+        </div>
+       
+       
+      {#<img src="{{ asset('images/barcode_student.png') }}" style="padding-top: 2px; padding-left: 8px;"/>#}  
+      </div>
+      
+      <!-- /.col -->
+      <div class="col-xs-6">
+
+        <div class="table-responsive"  style='font-size: 10px'>
+          <table class="table">
+            <tr>
+              <th style="width:50%">DECISION DU CONSEIL</th>
+              
+            </tr>
+            <tr>
+              <th>TH + Felicitation:</th>
+              <td>Oui</td>
+            </tr>
+            <tr>
+              <th>TH + Encouragement:</th>
+              <td>Non</td>
+            </tr>
+            <tr>
+              <th>Tableau d'honneur:</th>
+              <td>Non</td>
+            </tr>
+            <tr>
+              <th>Avertissement:</th>
+              <td>Non</td>
+            </tr>
+            <tr>
+              <th>Blame:</th>
+              <td>Non</td>
+            </tr>
+            <tr>
+              <th>Exclu:</th>
+              <td>Non</td>
+            </tr>
+          </table>
+        </div>
+        
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- ./wrapper -->
+</body>
+{% endfor %}
+
+</html>
