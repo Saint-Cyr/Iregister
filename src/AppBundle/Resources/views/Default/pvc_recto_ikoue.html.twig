@@ -50,7 +50,7 @@
                                 <td><b>Nom(s):</b></td><td>{{ column.name}}</td>
                             </tr>
                             <tr>
-                                <td><b>Adrs:</b></td><td>{{ column.area}}</td>
+                                <td><b>Juridiction:</b></td><td>{{ column.area}}</td>
                             </tr>
                             <tr>
                                 {% if column.sexe == "F" %}
@@ -63,7 +63,7 @@
                                 <td><b>Bureau:</b></td><td>{{ column.area}}</td>
                             </tr>
                             <tr>
-                                <td><b>Delivree:</b></td><td>le 17 Juil. 19</td>
+                                <td><b>Position:</b></td><td>{{ column.position}}</td>
                             </tr>
                            
                             
@@ -72,7 +72,7 @@
                                 <td><b>Nom(s):</b></td><td style="font-size: 12px;">{{ column.name}}</td>
                             </tr>
                             <tr>
-                                <td><b>Adrs:</b></td><td>{{ column.area}}</td>
+                                <td><b>Juridiction:</b></td><td>{{ column.area}}</td>
                             </tr>
                             <tr>
                                 {% if column.sexe == "F" %}
@@ -85,14 +85,14 @@
                                 <td><b>Bureau:</b></td><td>{{ column.area}}</td>
                             </tr>
                             <tr>
-                                <td><b>Delivree:</b></td><td>le 17 Juil. 19</td>
+                                <td><b>Delivree:</b></td><td>{{ column.position}}</td>
                             </tr>
                         {% else %}
                             <tr>
                                 <td><b>Nom(s):</b></td><td style="font-size: 11.5px;">{{ column.name}}</td>
                             </tr>
                             <tr>
-                                <td><b>Adrs:</b></td><td>{{ column.area}}</td>
+                                <td><b>Juridiction:</b></td><td>{{ column.area}}</td>
                             </tr>
                             <tr>
                                 {% if column.sexe == "F" %}
@@ -105,7 +105,7 @@
                                 <td><b>Bureau:</b></td><td>{{ column.area}}</td>
                             </tr>
                             <tr>
-                                <td><b>Delivree:</b></td><td>le 17 Juil. 19</td>
+                                <td><b>Position:</b></td><td>{{ column.position }}</td>
                             </tr>
                         {% endif %}
                         {#<tr>
@@ -148,7 +148,7 @@
     
     .twPc-div {
     background: #fff none repeat scroll 0 0;
-    border: 5px solid #e1e8ed;
+    border: 5px solid white;
     border-radius: 16px;
     height: 263px;
     width: 445px;

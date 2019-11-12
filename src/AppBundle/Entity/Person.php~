@@ -36,6 +36,13 @@ class Person
     /**
      * @var string
      *
+     * @ORM\Column(name="position", type="string", length=255)
+     */
+    private $position;
+    
+    /**
+     * @var string
+     *
      * @ORM\Column(name="firstName", type="string", length=255, nullable=true)
      */
     private $firstName;
@@ -285,6 +292,11 @@ class Person
      */
     public function refreshUpdated()
     {
+        if($this->getFile()){
+            $this->setCollectedImageUpdated(true);
+            $this->setCollectedImage($this->getId().'.'.$this->getFile()->guessExtension());
+        }
+        
         $this->setUpdated(new \DateTime());
     }
     
@@ -309,8 +321,9 @@ class Person
         if (null === $this->getFile()) {
             return;
         }
+        
         // move takes the target directory and target filename as params
-        $this->getFile()->move(getcwd().'/upload/person', $this->getId().'.'.$this->getFile()->guessExtension());
+        $this->getFile()->move(getcwd().'/upload/person/media', $this->getId().'.'.$this->getFile()->guessExtension());
         // clean up the file property as you won't need it anymore
         $this->setFile(null);
     }
@@ -449,15 +462,31 @@ class Person
      */
     public function getCollectedImage()
     {
-        if(!$this->isCollectedImageUpdated()){
-            return $this->collectedImage;
-        }else{
-            if((substr($this->collectedImage, -4) == 'jpeg')||(substr($this->collectedImage, -3) == 'jpg')||(substr($this->collectedImage, -3) == 'png')){
-                return $this->getId().'.'.$this->collectedImage;
-            }else{
-                return null;
-            }
-        }
+        return $this->collectedImage;
         
+    }
+
+    /**
+     * Set collectedImageUpdated
+     *
+     * @param boolean $collectedImageUpdated
+     *
+     * @return Person
+     */
+    public function setCollectedImageUpdated($collectedImageUpdated)
+    {
+        $this->collectedImageUpdated = $collectedImageUpdated;
+
+        return $this;
+    }
+
+    /**
+     * Get collectedImageUpdated
+     *
+     * @return boolean
+     */
+    public function isCollectedImageUpdated()
+    {
+        return $this->collectedImageUpdated;
     }
 }
