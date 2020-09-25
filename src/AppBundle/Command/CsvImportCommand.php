@@ -32,11 +32,13 @@ class CsvImportCommand extends Command
         $io = new SymfonyStyle($input, $output);
         
         $io->writeln('File Processing...');
-        $io->title('==== <options=bold;fg=red>iReg®</></> is a trademark of Saint-Cyr MAPOUKA. All rights reserved. || By iSTech ( © 2016-2019) ==============');
+        $io->title('==== <options=bold;fg=red>iReg®</></> is a trademark of Saint-Cyr MAPOUKA. All rights reserved. || By iSTech ( © 2016-2020) ==============');
         //Instatiate the csv reader library
         $reader = \League\Csv\Reader::createFromPath('%kernel.root_dir%/../web/data/clpr_members_list.csv');
         $results = $reader->fetchAssoc();
-        $io->progressStart(count($results));
+        
+        $io->progressStart();
+        
         //set a variable to count the number of processed
         $recorded = 0;
         $unrecorded = 0;
@@ -53,6 +55,7 @@ class CsvImportCommand extends Command
                 $person->setSexe($row['sexe']);
                 //$person->setAge($row['age']);
                 $person->setCommune($row['juridiction']);
+                $person->setPosition($row['position']);
                 $person->setCollectedImage($row['image']);
                 $this->em->persist($person);
                 $io->progressAdvance();

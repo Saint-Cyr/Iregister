@@ -43,6 +43,13 @@ class Person
     /**
      * @var string
      *
+     * @ORM\Column(name="personId", type="string", length=255)
+     */
+    private $personId;
+    
+    /**
+     * @var string
+     *
      * @ORM\Column(name="firstName", type="string", length=255, nullable=true)
      */
     private $firstName;
@@ -486,6 +493,40 @@ class Person
      * @return boolean
      */
     public function isCollectedImageUpdated()
+    {
+        return $this->collectedImageUpdated;
+    }
+
+    /**
+     * Set position
+     *
+     * @param string $position
+     *
+     * @return Person
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return string
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Get collectedImageUpdated
+     *
+     * @return boolean
+     */
+    public function getCollectedImageUpdated()
     {
         return $this->collectedImageUpdated;
     }

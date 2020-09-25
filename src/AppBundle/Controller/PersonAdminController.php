@@ -8,12 +8,15 @@ use Sonata\AdminBundle\Controller\CRUDController;
 
 class PersonAdminController extends CRUDController
 {
-    public function batchActionGenerateCard(ProxyQueryInterface $selectedPersons) {
+    public function batchActionGenerateCard(ProxyQueryInterface $selectedModelQuery, Request $request = null) {
         
-        $prss = $selectedPersons->getMaxResults();
-        foreach ($prss as $prs){
-            var_dump('ok');exit;
-            $formatedId = str_pad($prs->getId(),10,"0",STR_PAD_LEFT); 
+        $selectedPersons = $selectedModelQuery->execute();
+        
+        //Build the barcode for each teacher
+        foreach ($selectedPersons as $prs){
+            
+            $formatedId = str_pad($prs->getPosition(),3,"0",STR_PAD_LEFT); 
+            
             $options = array(
                 'code'   => $formatedId,
                 'type'   => 'codabar',
@@ -24,11 +27,13 @@ class PersonAdminController extends CRUDController
                 //red color
                 'color'  => array(186, 32, 32),
                 );
-            $barcode = $this->get('cibincasso_barcode.generator')->generate($options);
-            $prs->setBarcode($barcode);
-            $persons2[] = $prs;
+             
+            //$barcode = $this->get('cibincasso_barcode.generator')->generate($options);
+            $prs->setBarcode($formatedId);
         }
         
-        return $this->render("@App/Default/persons_card.html.twig", array('persons2' => $persons2));
+        //return $this->render("@App/Default/pvc_verso_gate.html.twig", array('persons' => $persons));
+        //return $this->render("@App/Default/pvc_recto_ikoue.html.twig", array('persons' => $persons));
+        return $this->render("@App/Default/pvc_recto_gate.html.twig", array('persons' => $selectedPersons));
     }
 }

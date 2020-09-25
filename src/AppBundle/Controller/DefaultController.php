@@ -370,7 +370,7 @@ class DefaultController extends Controller
         //Build the barcode for each teacher
         foreach ($persons as $prs){
             
-            $formatedId = str_pad($prs->getId(),10,"0",STR_PAD_LEFT); 
+            $formatedId = str_pad($prs->getPosition(),3,"0",STR_PAD_LEFT); 
             
             $options = array(
                 'code'   => $formatedId,
@@ -383,11 +383,12 @@ class DefaultController extends Controller
                 'color'  => array(186, 32, 32),
                 );
              
-            $barcode = $this->get('cibincasso_barcode.generator')->generate($options);
-            $prs->setBarcode($barcode);
+            //$barcode = $this->get('cibincasso_barcode.generator')->generate($options);
+            $prs->setBarcode($formatedId);
         }
         
-        return $this->render("@App/Default/pvc_verso.html.twig", array('persons' => $persons));
+        //return $this->render("@App/Default/pvc_verso_gate.html.twig", array('persons' => $persons));
         //return $this->render("@App/Default/pvc_recto_ikoue.html.twig", array('persons' => $persons));
+        return $this->render("@App/Default/pvc_recto_gate.html.twig", array('persons' => $persons));
     }
 }

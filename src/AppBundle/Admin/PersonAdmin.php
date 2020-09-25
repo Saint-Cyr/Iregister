@@ -31,9 +31,9 @@ class PersonAdmin extends AbstractAdmin
             ->add('firstName')
             ->add('age')
             ->add('position', null, array('editable' => true))
-            ->add('area')
+            ->add('area', null, array('editable' => true))
             ->add('status')
-            ->add('collectedImageUpdated', null, array('editable' => true))
+            //->add('collectedImageUpdated', null, array('editable' => true))
             ->add('sexe')
             ->add('_action', null, [
                 'actions' => [

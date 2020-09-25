@@ -523,4 +523,28 @@ class Person
     {
         return $this->collectedImageUpdated;
     }
+
+    /**
+     * Set personId
+     *
+     * @param string $personId
+     *
+     * @return Person
+     */
+    public function setPersonId($personId)
+    {
+        $this->personId = $personId;
+
+        return $this;
+    }
+
+    /**
+     * Get personId
+     *
+     * @return string
+     */
+    public function getPersonId()
+    {
+        return $this->personId;
+    }
 }
