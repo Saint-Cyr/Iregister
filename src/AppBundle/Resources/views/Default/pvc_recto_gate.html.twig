@@ -25,15 +25,15 @@
                     <table style="margin-left:107px; color: black;">
                         <tr>
                             <td><img src="{{ asset('images/logo_mc.png') }}" width="50px"/></td>
-                            <td><img src="{{ asset('images/logo_gate.png') }}" width="45px" style="margin-left: 120px;"/></td>
+                            <td><img src="{{ asset('images/logo_unicef.png') }}" width="45px" style="margin-left: 120px;"/></td>
                         </tr>
                         
                         
                         <tr></tr>
                         <br>
-                        <tr style="color: #ba2020;">
+                        <tr style="color: #ba2020; font-size: 13.5px;">
                             {% if column.sexe == "F" %}
-                                <td><b>CARTE</b></td><td><b>PARTICIPANT CASH</b></td>
+                                <td><b>CARTE</b></td><td><b>PARTICIPANTE CASH</b></td>
                             {% else %}
                                 <td><b>CARTE</b></td><td><b>PARTICIPANT CASH</b></td>
                             {% endif %}
@@ -47,17 +47,20 @@
                                 <td><b>Nom(s):</b></td><td>{{ column.name}}</td>
                             </tr>
                             <tr>
+                                <td><b>Prénom(s):</b></td><td>{{ column.firstName}}</td>
+                            </tr>
+                            <tr>
                                 <td><b>Localité:</b></td><td>{{ column.area}}</td>
                             </tr>
                             <tr>
-                                {% if column.sexe == "F" %}
+                                {% if (column.sexe == "F") or (column.sexe == "Femme") or (column.sexe == "femme")%}
                                     <td><b>Sexe:</b></td><td>Femme</td>
                                 {% else %}
                                     <td><b>Sexe:</b></td><td>Homme</td>
                                 {% endif %}
                             </tr>
                             <tr>
-                                <td><b>Validité:</b></td><td>31 Juillet 2020</td>
+                                <td><b>Validité:</b></td><td>31 Decembre 2020</td>
                             </tr>
                             <tr>
                                 <td><b>#ID:</b></td><td>{{ column.barcode }}</td>
@@ -69,10 +72,13 @@
                                 <td><b>Nom(s):</b></td><td style="font-size: 12px;">{{ column.name}}</td>
                             </tr>
                             <tr>
+                                <td><b>Prénom(s):</b></td><td>{{ column.firstName}}</td>
+                            </tr>
+                            <tr>
                                 <td><b>Localité:</b></td><td>{{ column.area}}</td>
                             </tr>
                             <tr>
-                                {% if column.sexe == "F" %}
+                                {% if (column.sexe == "F") or (column.sexe == "Femme") or (column.sexe == "femme")%}
                                     <td><b>Sexe:</b></td><td>Femme</td>
                                 {% else %}
                                     <td><b>Sexe:</b></td><td>Homme</td>
@@ -89,17 +95,20 @@
                                 <td><b>Nom(s):</b></td><td style="font-size: 11.5px;">{{ column.name}}</td>
                             </tr>
                             <tr>
+                                <td><b>Prénom(s):</b></td><td>{{ column.firstName}}</td>
+                            </tr>
+                            <tr>
                                 <td><b>Localité:</b></td><td>{{ column.area}}</td>
                             </tr>
                             <tr>
-                                {% if column.sexe == "F" %}
+                                {% if (column.sexe == "F") or (column.sexe == "Femme") or (column.sexe == "femme")%}
                                     <td><b>Sexe:</b></td><td>Femme</td>
                                 {% else %}
                                     <td><b>Sexe:</b></td><td>Homme</td>
                                 {% endif %}
                             </tr>
                             <tr>
-                                <td><b>Validité:</b></td><td> 31 Juillet 2020</td>
+                                <td><b>Validité:</b></td><td>31 Decembre 2020</td>
                             </tr>
                             <tr>
                                 <td><b>#ID:</b></td><td>{{ column.barcode }}</td>

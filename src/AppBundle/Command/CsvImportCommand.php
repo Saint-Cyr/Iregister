@@ -49,7 +49,7 @@ class CsvImportCommand extends Command
                 //create person object
                 $person = new Person();
                 $person->setName($row['name']);
-                //$person->setFirstName($row['first_name']);
+                $person->setFirstName($row['first_name']);
                 $person->setArea($row['area']);
                 //$person->setStatus($row['status']);
                 $person->setSexe($row['sexe']);
