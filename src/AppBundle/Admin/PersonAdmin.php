@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class PersonAdmin extends AbstractAdmin
+final class PersonAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -61,6 +61,7 @@ class PersonAdmin extends AbstractAdmin
         $formMapper
         ->with('General information', array('class' => 'col-md-8'))
             ->add('name')
+            ->add('firstName')
             ->add('area')
             ->add('status')
             ->add('sexe')
@@ -106,5 +107,25 @@ class PersonAdmin extends AbstractAdmin
         if ($image->getFile()) {
             $image->refreshUpdated();
         }
+    }
+    
+    protected function configureDefaultSortValues(array &$sortValues)
+    {
+        var_dump('ok');exit;
+        // display the first page (default = 1)
+        $sortValues['_page'] = 1;
+
+        // reverse order (default = 'ASC')
+        $sortValues['_sort_order'] = 'ASC';
+
+        // name of the ordered field (default = the model's id field, if any)
+        $sortValues['_sort_by'] = 'firstName';
+    }
+    
+    protected function configureQuery(ProxyQueryInterface $query)
+    {
+        var_dump('ok');exit;
+        $query->addOrderBy('author', 'ASC');
+        $query->addOrderBy('createdAt', 'ASC');
     }
 }

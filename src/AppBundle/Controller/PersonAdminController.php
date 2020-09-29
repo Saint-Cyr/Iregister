@@ -36,4 +36,5 @@ class PersonAdminController extends CRUDController
         //return $this->render("@App/Default/pvc_recto_ikoue.html.twig", array('persons' => $persons));
         return $this->render("@App/Default/pvc_recto_gate.html.twig", array('persons' => $selectedPersons));
     }
+
 }
