@@ -5,11 +5,20 @@ namespace AppBundle\Admin;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 final class PersonAdmin extends AbstractAdmin
 {
+    protected $perPageOptions = [10, 64, 128, 256, 'All'];
+    
+    protected $dataGriddValues = [
+        '_per_page' => 10,
+    ];
+
+    protected $maxPerPage = 10;
+
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -28,13 +37,13 @@ final class PersonAdmin extends AbstractAdmin
             ->add('collectedImage')
             ->add('image', null, array('template' => 'AppBundle:Default:list.html.twig'))
             ->add('name', null, array('editable' => true))
-            ->add('firstName')
+            ->add('firstName', null, array('editable' => true))
             ->add('age')
             ->add('position', null, array('editable' => true))
             ->add('area', null, array('editable' => true))
             ->add('status')
             //->add('collectedImageUpdated', null, array('editable' => true))
-            ->add('sexe')
+            ->add('sexe', null, array('editable' => true))
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -62,13 +71,13 @@ final class PersonAdmin extends AbstractAdmin
         ->with('General information', array('class' => 'col-md-8'))
             ->add('name')
             ->add('firstName')
-            ->add('area')
+            /*->add('area')
             ->add('status')
-            ->add('sexe')
+            ->add('sexe')*/
         ->end();
         $formMapper
         ->with('Image', array('class' => 'col-md-4'))
-            ->add('collectedImage')
+            //->add('collectedImage')
             ->add('file', 'file', array('required' => false))
         ->end()
         ;
@@ -92,7 +101,7 @@ final class PersonAdmin extends AbstractAdmin
         ;
     }
     
-     public function prePersist($image)
+    public function prePersist($image)
     {
         $this->manageFileUpload($image);
     }
@@ -111,21 +120,20 @@ final class PersonAdmin extends AbstractAdmin
     
     protected function configureDefaultSortValues(array &$sortValues)
     {
-        var_dump('ok');exit;
+        //var_dump('ok');exit;
         // display the first page (default = 1)
         $sortValues['_page'] = 1;
 
         // reverse order (default = 'ASC')
-        $sortValues['_sort_order'] = 'ASC';
+        $sortValues['_sort_order'] = 'DESC';
 
         // name of the ordered field (default = the model's id field, if any)
-        $sortValues['_sort_by'] = 'firstName';
+        $sortValues['_sort_by'] = 'name';
     }
     
-    protected function configureQuery(ProxyQueryInterface $query)
+    protected function configureQuery(ProxyQueryInterface $query):ProxyQueryInterface
     {
-        var_dump('ok');exit;
         $query->addOrderBy('author', 'ASC');
-        $query->addOrderBy('createdAt', 'ASC');
+        $query->addOrderBy('names', 'DESC');
     }
 }

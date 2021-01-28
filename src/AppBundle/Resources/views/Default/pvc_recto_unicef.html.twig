@@ -4,50 +4,43 @@
     <tr align=center>
         {% for column in row %}
             <td width="50%">
-            <table style="margin-top: -25px; margin-left: -12px;">
-                <div style="margin-left: 85px; color: #0ba4ef;">
-                    <b>CARTE D'IDENTITE SCOLAIRE</b>
-                </div>
-                <div style="margin-left: 85px;">
-                    <b style="color: #0ba4ef;">College de NomDuLycéeEstIci<b>
-                </div>
-            </table>
             <div class="twPc-div col-sm-6 col-md-6 col-xs-6" style="background-color: white;">
-            <a class="twPc-bg twPc-block">
-                
-                <img alt="iReg" src="{{ asset('images/stamp.jpg') }}" style="margin: 170 0 0 -300" width="100px;"/>
-            </a>
+            <a class="twPc-bg twPc-block"></a>
             <div>
                 <a class="twPc-avatarLink">
-                {% if column.collectedImage is empty %}
+                 {% if column.collectedImage is empty %}
                     {% if column.sexe == "F" %}
-                        <img alt="iReg" src="{{ asset('images/avatar_lady.png') }}" width="160px" class="passportPicture"
-                        style="border-radius: 50%;"/>
+                        <img alt="iReg" src="{{ asset('images/avatar2.png') }}" width="165px" class="passportPicture"
+                         style="border-radius: 50%;"/>
                     {% else %}
-                        <img alt="iReg" src="{{ asset('images/avatar_lady.png') }}" width="160px" class="passportPicture"
-                        style="border-radius: 50%;"/>
+                        <img alt="iReg" src="{{ asset('images/avatar.png') }}" width="165px" class="passportPicture"
+                         style="border-radius: 50%;"/>
                     {% endif %}
                 {% else %}
-                    <img alt="academ" src="{{ asset('images/avatar_lady.png') }}" width="160px" class="passportPicture"
-                        style="border-radius: 50%;"/>
+                    <img alt="academ" src="{{ asset('upload/person/media/'~column.collectedImage) }}" width="160px" class="passportPicture"
+                         style="border-radius: 50%;"/>
                 {% endif %}
                 </a>
-                
                 <div class="column">
-                    
-                    <table style="margin-left:115px; color: black;">
+                    <table style="margin-left:107px; color: black;">
                         <tr>
-                            <td></td>
-                            <td><img src="{{ asset('images/logo_education.png') }}" width="25px" height="30px" style="margin-left: 130px; margin-top: 6px;"/></td>
+                            <td><img src="{{ asset('images/logo_mc.png') }}" width="50px"/></td>
+                            <td><img src="{{ asset('images/logo_unicef.png') }}" width="45px" style="margin-left: 120px;"/></td>
                         </tr>
+                        
+                        
+                        <tr></tr>
                         <br>
                         <tr style="color: #ba2020; font-size: 13.5px;">
-                                <td></td>
+                            {% if column.sexe == "F" %}
+                                <td><b>CARTE</b></td><td><b>PARTICIPANTE CASH</b></td>
+                            {% else %}
+                                <td><b>CARTE</b></td><td><b>PARTICIPANT CASH</b></td>
+                            {% endif %}
                         </tr>
                         <tr>
                             <td><b></b></td><td><b></b></td>
                         </tr>
-                        <br>
                         <br>
                         {% if column.name|length < 19 %}
                             <tr>
@@ -57,22 +50,20 @@
                                 <td><b>Prénom(s):</b></td><td>{{ column.firstName}}</td>
                             </tr>
                             <tr>
-                                <td><b>Né le:</b></td><td> 12/12/1998 <b>à</b> {{ column.area }}</td>
-                            </tr>
-                            
-                            <tr>
-                                <td><b>Nationalité:</b></td><td> Centrafricaine</td>
-                            </tr>
-                            
-                            <tr>
-                                <td><b>Inscrit(e) en: </b></td><td> 3em A</td>
+                                <td><b>Localité:</b></td><td>{{ column.area}}</td>
                             </tr>
                             <tr>
-                                <td><b>Année:</b></td><td>2020 - 2021</td>
+                                {% if (column.sexe == "F") or (column.sexe == "Femme") or (column.sexe == "femme")%}
+                                    <td><b>Sexe:</b></td><td>Femme</td>
+                                {% else %}
+                                    <td><b>Sexe:</b></td><td>Homme</td>
+                                {% endif %}
                             </tr>
                             <tr>
-                                <td><b>#ID: {{ column.id }}</b></td>
-                                <td><img src="data:image/png;base64, {{ column.barcode }}" width="80px" style="padding-left: 10px; padding-right: 10px;"/></td>
+                                <td><b>Validité:</b></td><td>14 Novembre 2020</td>
+                            </tr>
+                            <tr>
+                                <td><b>#ID:</b></td><td>{{ column.barcode }}</td>
                             </tr>
                            
                             
@@ -167,13 +158,13 @@
     
     .twPc-div {
     background: #fff none repeat scroll 0 0;
-    border: 2px solid white;
+    border: 5px solid white;
     border-radius: 16px;
     height: 263px;
     width: 445px;
     max-width: 455px;
-    margin-top: -40px;
-    margin-bottom: 28px;
+    margin-top: -20px;
+    margin-bottom: 11px;
     
 }
 .twPc-bg {
@@ -198,7 +189,7 @@
     border-radius: 50%;
     display: inline-block !important;
     float: left;
-    margin: -79px -10px -10  3px;
+    margin: -89px 5px 0 8px;
     max-width: 100%;
     padding: 1px;
     vertical-align: bottom;
@@ -230,7 +221,7 @@
     box-sizing: border-box;
     display: table;
     margin: 0;
-    min-width: 100%;/
+    min-width: 100%;
     padding: 0;
     table-layout: auto;
 }
@@ -265,8 +256,8 @@ ul.twPc-Arrange {
 .column {
      width:-50px;
      float:left;
-     margin: -210px 5px 0 8px;
-     margin-left: 50px;
+     margin: -187px 5px 0 18px;
+     margin-left: 90px;
 }
 </style>
 <script>
