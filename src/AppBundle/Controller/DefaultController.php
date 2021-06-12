@@ -386,9 +386,9 @@ class DefaultController extends Controller
             //$barcode = $this->get('cibincasso_barcode.generator')->generate($options);
             $prs->setBarcode($formatedId);
         }
-        
+        $data = [1, 2, 3, 4, 5, 6];
         //return $this->render("@App/Default/pvc_verso_gate.html.twig", array('persons' => $persons));
         //return $this->render("@App/Default/pvc_recto_ikoue.html.twig", array('persons' => $persons));
-        return $this->render("@App/Default/pvc_recto_gate.html.twig", array('persons' => $persons));
+        return $this->render("@App/Default/pvc.html.twig", array('item' => $data));
     }
 }

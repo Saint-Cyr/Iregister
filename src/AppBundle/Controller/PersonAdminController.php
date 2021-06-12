@@ -32,12 +32,16 @@ class PersonAdminController extends CRUDController
             $prs->setBarcode($formatedId);
         }
         
+        for($i=1; $i<10; $i++){
+            $data[] = $i;
+        };
+        
         //return $this->render("@App/Default/pvc_verso.html.twig", array('persons' => $selectedPersons));
         //return $this->render("@App/Default/pvc_recto_ikoue.html.twig", array('persons' => $persons));
         //return $this->render("@App/Default/pvc_recto_ikoue.html.twig", array('persons' => $persons));
         //return $this->render("@App/Default/pvc_recto_gate.html.twig", array('persons' => $selectedPersons));
         //return $this->render("@App/Default/pvc_recto.html.twig", array('persons' => $selectedPersons, 'id' => $formatedId));
-        return $this->render("@App/Default/pvc_recto_unicef.html.twig", array('persons' => $selectedPersons));
+        return $this->render("@App/Default/pvc_unicef.html.twig", array('items' => $data));
     }
 
 }
